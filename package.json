@@ -11,7 +11,6 @@
     "client": "npm run --prefix client dev",
     "server": "npm run --prefix server dev",
     "install-all": "npm install --prefix client && npm install --prefix server"
-
   },
   "keywords": [],
   "author": "",
@@ -19,5 +18,8 @@
   "type": "commonjs",
   "devDependencies": {
     "concurrently": "^9.1.2"
+  },
+  "dependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
