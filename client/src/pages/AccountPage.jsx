@@ -1,34 +1,57 @@
-import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import axios from "axios";
+import AccountInfoCard from "../components/AccountInfoCard";
+
+const interpretAccountInfo = (data) => {
+  if (!data || !data.result || !data.result.value) {
+    return "error";
+  }
+
+  const acc = data.result.value;
+  const summary = {
+    lamports: acc.lamports,
+    sol: acc.lamports / 1e9,
+    owner: acc.owner,
+    executable: acc.executable,
+    rentEpoch: acc.rentEpoch,
+  };
+
+  if (acc.data?.parsed) {
+    summary.program = acc.data.program;
+    summary.type = acc.data.parsed.type;
+    summary.details = acc.data.parsed.info;
+  }
+
+  return summary;
+};
 
 const AccountPage = () => {
-  const { address } = useParams();
-  const [accountInfo, setAccountInfo] = useState(null);
+  const { address } = useParams(); // ← bitno
+  const [accountData, setAccountData] = useState(null);
 
   useEffect(() => {
     const fetchAccountInfo = async () => {
       try {
-        const res = await axios.post("http://localhost:5000/api/account-info", {
-          address: address,
+        const response = await axios.post("http://localhost:5000/api/account-info", {
+          address,
         });
-        setAccountInfo(res.data);
-      } catch (err) {
-        console.error("Failed to fetch account info", err);
+        const interpreted = interpretAccountInfo(response.data);
+        setAccountData(interpreted);
+      } catch (error) {
+        console.error("Failed to fetch account info", error);
+        setAccountData("error");
       }
     };
 
-    fetchAccountInfo();
+    if (address) {
+      fetchAccountInfo();
+    }
   }, [address]);
 
   return (
-    <div>
-      <h2>Account Info for {address}</h2>
-      {accountInfo ? (
-        <pre>{JSON.stringify(accountInfo, null, 2)}</pre>
-      ) : (
-        <p>Loading...</p>
-      )}
+    <div className="p-8">
+      <AccountInfoCard accountData={accountData} />
     </div>
   );
 };
