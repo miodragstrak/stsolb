@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import LoadingSpinner from './LoadingSpinner';
+import { Link } from "react-router-dom";
 
 const ValidatorDashboard = () => {
   const [validators, setValidators] = useState([]);
@@ -11,7 +12,7 @@ const ValidatorDashboard = () => {
     axios.get(`${import.meta.env.VITE_API_URL}/validators`)
       .then(response => {
         console.log("Validator API response:", response.data);
-        setValidators(response.data.vote_accounts); // <<< uzimaš samo niz adresa
+        setValidators(response.data.vote_accounts || []); // Izvlačimo niz iz objekta
         setLoading(false);
       })
       .catch(error => {
@@ -30,13 +31,20 @@ const ValidatorDashboard = () => {
       {validators.length === 0 ? (
         <p>No validators available.</p>
       ) : (
-        <ul>
-          {validators.map((validator, index) => (
-            <li key={index}>
-              <p><strong>Validator {index + 1}:</strong> {validator}</p>
-            </li>
-          ))}
-        </ul>
+          <ul>
+            {validators.map((votePubkey, index) => (
+              <li key={index}>
+                <p>
+                  <strong>Validator {index + 1}:</strong>{" "}
+                  <Link to={`/account/${votePubkey}`}>
+                    <span style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }}>
+                      {votePubkey}
+                    </span>
+                  </Link>
+                </p>
+              </li>
+            ))}
+          </ul>
       )}
     </div>
   );
