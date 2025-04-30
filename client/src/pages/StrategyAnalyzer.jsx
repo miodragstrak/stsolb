@@ -2,50 +2,52 @@ import { useEffect, useState } from 'react';
 
 export default function StrategyAnalyzer() {
   const [apy, setApy] = useState(null);
-  const [prices, setPrices] = useState(null);
-  const [investment, setInvestment] = useState(1000); // default $1000
-  const [selectedApy, setSelectedApy] = useState(apy?.apy || 10); // Default bSOL APY (možeš postaviti početnu vrednost)
+  const [bsolPrice, setBsolPrice] = useState(null);
+  const [solPrice, setSolPrice] = useState(null);
+  const [investment, setInvestment] = useState(1000);
+  const [selectedApy, setSelectedApy] = useState(10);
 
   useEffect(() => {
-    fetch('/api/apy')
+    fetch('/api/solblaze/apy')
       .then(res => res.json())
       .then(data => {
         setApy(data);
-        setSelectedApy(data.apy); // Kada API vrati podatke, postavimo default APY
+        setSelectedApy(data.apy);
       });
 
-    fetch('/api/prices')
+    fetch('/api/solblaze/bsol-price')
       .then(res => res.json())
-      .then(data => setPrices(data));
+      .then(data => setBsolPrice(data['blazestake-staked-sol']?.usd));
+
+    fetch('/api/solblaze/sol-price')
+      .then(res => res.json())
+      .then(data => setSolPrice(data['solana']?.usd));
   }, []);
 
-  // Funkcija za izračunavanje profitabilnosti na osnovu APY-a i godina
   function calculateProfit(principal, apyPercent, years = 1) {
-    const periods = 12; // Mesečno
+    const periods = 12;
     const rate = apyPercent / 100;
     return principal * Math.pow(1 + rate / periods, periods * years);
   }
 
-  // Ako podaci nisu još učitani, prikazujemo Loading...
-  if (!apy || !prices) {
+  if (!apy || bsolPrice === null || solPrice === null) {
     return <div>Loading data...</div>;
   }
 
-  // Izračunavanje teoretskog profita
   const theoreticalProfit = calculateProfit(investment, selectedApy);
 
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">bSOL DeFi Strategy Analyzer</h1>
+    <div>
+      <h1>bSOL DeFi Strategy Analyzer</h1>
 
-      <div className="mb-4">
-        <p><strong>Trenutni bSOL APY:</strong> {apy.apy}%</p>
-        <p><strong>Cena bSOL:</strong> ${prices['blazestake-staked-sol']?.usd}</p>
-        <p><strong>Cena SOL:</strong> ${prices['solana']?.usd}</p>
+      <div>
+        <p><strong>Current bSOL APY:</strong> {apy.apy}%</p>
+        <p><strong>bSOL price:</strong> ${bsolPrice}</p>
+        <p><strong>SOL price:</strong> ${solPrice}</p>
       </div>
 
-      <div className="mb-4">
-        <label className="block mb-2">Investicija ($)</label>
+      <div>
+        <label>Investment ($)</label>
         <input
           type="number"
           className="border p-2"
@@ -54,8 +56,8 @@ export default function StrategyAnalyzer() {
         />
       </div>
 
-      <div className="mb-4">
-        <label className="block mb-2">Izaberite APY (%)</label>
+      <div>
+        <label>Select APY (%)</label>
         <input
           type="range"
           min="0"
@@ -65,12 +67,12 @@ export default function StrategyAnalyzer() {
           onChange={(e) => setSelectedApy(Number(e.target.value))}
           className="w-full"
         />
-        <p className="text-center">Trenutni APY: {selectedApy.toFixed(2)}%</p>
+        <p>APY for financial analysis: {selectedApy.toFixed(2)}%</p>
       </div>
 
-      <div className="mt-6">
-        <h2 className="text-xl font-semibold">Analiza</h2>
-        <p>Za {investment}$, potencijalni profit nakon 1 godine sa {selectedApy.toFixed(2)}% APY: <strong>${theoreticalProfit.toFixed(2)}</strong></p>
+      <div>
+        <h2>Analysis</h2>
+        <p>For {investment}$, potential profit after 1 year with {selectedApy.toFixed(2)}% APY: <strong>${theoreticalProfit.toFixed(2)}</strong></p>
       </div>
     </div>
   );

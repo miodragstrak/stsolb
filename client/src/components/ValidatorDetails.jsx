@@ -14,7 +14,7 @@ const ValidatorDetails = () => {
 
     const fetchValidatorInfo = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/validator/${votePubkey}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/solblaze/validators/${votePubkey}`);
         setValidatorInfo(response.data);
       } catch (err) {
         console.error(err);

@@ -8,7 +8,7 @@ const ApyDashboard = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/apy`)
+    axios.get(`${import.meta.env.VITE_API_URL}/solblaze/apy`)
       .then(response => {
         setApyData(response.data);
         setLoading(false);

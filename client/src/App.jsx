@@ -3,20 +3,20 @@ import Home from './pages/Home';
 import StrategyAnalyzer from './pages/StrategyAnalyzer';
 import ValidatorsPage from './pages/ValidatorsPage';
 import AccountPage from './pages/AccountPage';
-import ValidatorDashboard from "./components/ValidatorDashboard";
+import { Link } from 'react-router-dom';
 
 
 function App() {
   return (
     <Router>
       <nav>
-        <a href="/">Home</a> | <a href="/analyzer">Strategy Analyzer</a> | <a href="/validators">Validators</a>
+        <Link to="/">Home</Link> | <Link to="/analyzer">Strategy Analyzer</Link> | <Link to="/validators">Validators</Link>
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/analyzer" element={<StrategyAnalyzer />} />
         <Route path="/validators" element={<ValidatorsPage />} />
-        <Route path="/account/:address" element={<AccountPage />} />
+        <Route path="/account-info/:address" element={<AccountPage/>} />
       </Routes>
     </Router>
   );

@@ -9,10 +9,10 @@ const ValidatorDashboard = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/validators`)
+    axios.get(`${import.meta.env.VITE_API_URL}/solblaze/validators`)
       .then(response => {
         console.log("Validator API response:", response.data);
-        setValidators(response.data.vote_accounts || []); // Izvlačimo niz iz objekta
+        setValidators(response.data.vote_accounts || []);
         setLoading(false);
       })
       .catch(error => {
@@ -36,7 +36,7 @@ const ValidatorDashboard = () => {
               <li key={index}>
                 <p>
                   <strong>Validator {index + 1}:</strong>{" "}
-                  <Link to={`/account/${votePubkey}`}>
+                  <Link to={`/account-info/${votePubkey}`}>
                     <span style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }}>
                       {votePubkey}
                     </span>
