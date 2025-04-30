@@ -1,0 +1,38 @@
+header {
+    background-color: #121212;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .nav-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  h1 {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+  }
+  
+  nav {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    opacity: 0.75;
+  }
+  
+  nav a.active {
+    color: var(--accent-color);
+    opacity: 1;
+  }
+  
+  nav a:hover {
+    opacity: 1;
+  }
+  

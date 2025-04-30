@@ -33,7 +33,7 @@ const ValidatorDetails = () => {
   if (!validatorInfo) return <div>No data available.</div>;
 
   return (
-    <div>
+    <div lassName="card">
       <h2>Validator Details</h2>
       <p><strong>Vote Pubkey:</strong> {validatorInfo.votePubkey}</p>
       <p><strong>Commission:</strong> {validatorInfo.commission}%</p>

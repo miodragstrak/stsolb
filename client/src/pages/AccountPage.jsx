@@ -52,8 +52,9 @@ const AccountPage = () => {
   if (!accountData) return <p>Account not found.</p>;
 
   return (
-    <div>
+    <div className="card">
       <h1>Account overview</h1>
+      <p>View detailed validator stats including Epoch progress, Total Credits, and Delta activity. Track validator ownership and performance changes in real time.</p>
       <p><strong>Address:</strong> {address}</p>
       <p><strong>State:</strong> {accountData.sol.toFixed(4)} SOL</p>
       <p><strong>Owner:</strong> {accountData.owner}</p>
@@ -61,11 +62,13 @@ const AccountPage = () => {
       {accountData.program && (
         <>
           <hr />
+          <p></p>
           <h3>Program and type</h3>
           <p><strong>Program:</strong> {accountData.program}</p>
           <p><strong>Type:</strong> {accountData.type}</p>
 
           <hr />
+          <p></p>
           <h3>Details (parsed)</h3>
           <pre>
             {JSON.stringify(accountData.details, null, 2)}
@@ -76,9 +79,10 @@ const AccountPage = () => {
       {voteData?.epochCredits && (
         <>
           <hr />
+          <p></p>
           <h3>Activity by epoch</h3>
           <p>{stability(voteData.epochCredits)}</p>
-
+          <p></p>
           <table>
             <thead>
               <tr>
@@ -99,6 +103,7 @@ const AccountPage = () => {
               ))}
             </tbody>
           </table>
+          <p></p>
           <h3>Visual display of delta values</h3>
           <div style={{ width: '100%', height: 300 }}>
               <ResponsiveContainer width="50%" height="50%">

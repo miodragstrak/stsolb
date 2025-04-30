@@ -26,7 +26,7 @@ const ValidatorDashboard = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div>
+    <div lassName="card">
       <h2>Validators</h2>
       {validators.length === 0 ? (
         <p>No validators available.</p>
@@ -34,14 +34,12 @@ const ValidatorDashboard = () => {
           <ul>
             {validators.map((votePubkey, index) => (
               <li key={index}>
-                <p>
                   <strong>Validator {index + 1}:</strong>{" "}
                   <Link to={`/account-info/${votePubkey}`}>
                     <span style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }}>
                       {votePubkey}
                     </span>
                   </Link>
-                </p>
               </li>
             ))}
           </ul>

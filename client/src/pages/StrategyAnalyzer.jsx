@@ -37,25 +37,30 @@ export default function StrategyAnalyzer() {
   const theoreticalProfit = calculateProfit(investment, selectedApy);
 
   return (
-    <div>
+    <div className="card">
       <h1>bSOL DeFi Strategy Analyzer</h1>
-
+      <p></p>
+      <p>Simulate your staking returns by adjusting APY and investment amount to see potential gains over time. Understand how small changes in yield can lead to significant outcomes.</p>
       <div>
         <p><strong>Current bSOL APY:</strong> {apy.apy}%</p>
         <p><strong>bSOL price:</strong> ${bsolPrice}</p>
         <p><strong>SOL price:</strong> ${solPrice}</p>
+        <p></p>
+        <p></p>
       </div>
-
+      <hr />
+      <p></p>
       <div>
-        <label>Investment ($)</label>
+        <h1>Analysis</h1>
+        <label>Your investment ($)</label>
         <input
           type="number"
           className="border p-2"
           value={investment}
           onChange={(e) => setInvestment(Number(e.target.value))}
         />
+        <p></p>
       </div>
-
       <div>
         <label>Select APY (%)</label>
         <input
@@ -69,11 +74,13 @@ export default function StrategyAnalyzer() {
         />
         <p>APY for financial analysis: {selectedApy.toFixed(2)}%</p>
       </div>
-
+      <p></p>
       <div>
-        <h2>Analysis</h2>
-        <p>For {investment}$, potential profit after 1 year with {selectedApy.toFixed(2)}% APY: <strong>${theoreticalProfit.toFixed(2)}</strong></p>
+        <h3>➡️ For {investment}$, potential profit after 1 year with {selectedApy.toFixed(2)}% APY: <strong>💵${theoreticalProfit.toFixed(2)}</strong></h3>
+        <p></p>
+        <p></p>
       </div>
+      <hr />
     </div>
   );
 }

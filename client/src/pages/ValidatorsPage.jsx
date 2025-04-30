@@ -3,7 +3,7 @@ import ValidatorDashboard from '../components/ValidatorDashboard';
 
 const ValidatorsPage = () => {
   return (
-    <div>
+    <div className="card">
       <header>
         <h1>SolBlaze Validator Dashboard</h1>
         <p>

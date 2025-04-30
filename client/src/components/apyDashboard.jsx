@@ -26,6 +26,8 @@ const ApyDashboard = () => {
   return (
     <div>
       <h2>APY Data</h2>
+      <hr />
+      <p></p>
       <p>APY: {apyData.apy}%</p>
       <p>BLZE Bonus: {apyData.blze}%</p>
       <p>Base: {apyData.base}%</p>
