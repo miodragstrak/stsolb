@@ -1,12 +1,88 @@
-# React + Vite
+# 🔥 Solana Validator Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight Solana validator analytics dashboard that visualizes account activity, validator stability, and staking performance.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Validator account insights (Epoch credits, Delta, Owner info)
+- APY & strategy visualization
+- Clean, responsive UI
+- Express + Vite + React stack
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Getting Started
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/miodragstrak/stsolb.git
+cd solana-validator-dashboard
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure environment
+
+Copy `.env.example` and rename to `.env`:
+
+```bash
+cp .env.example .env
+```
+
+You can modify the port if needed (default is `5000`).
+
+### 4. Run the app
+
+```bash
+npm run dev
+```
+
+This will start both the frontend (Vite) and backend (Express) servers concurrently.
+
+---
+
+## 📦 Build for production
+
+To generate the production build of the frontend:
+
+```bash
+npm run build
+```
+
+To serve only the backend:
+
+```bash
+npm start
+```
+
+---
+
+## 📁 Project structure
+
+```
+client/      # Vite + React frontend
+server/      # Express backend
+.env         # Your environment variables
+```
+
+---
+
+## 🛠 Tech stack
+
+- React + Vite
+- Express.js
+- Solana Web3.js
+- Axios
+- Tailwind CSS
+- Recharts
+
+---
+
+## 📄 License
+
+MIT
