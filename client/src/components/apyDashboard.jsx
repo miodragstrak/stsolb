@@ -34,6 +34,8 @@ const ApyDashboard = () => {
       <p>DeFi: {apyData.defi}%</p>
       <p>Lending: {apyData.lending}%</p>
       <p>Liquidity: {apyData.liquidity}%</p>
+      <p></p>
+      <p>APY - Annual percentage yield | BLZE - BlazeRewards is a rewards program with the goal to incentivize liquid staking and DeFi participation on Solana | Base - The base stake amount is a dynamic value that changes based on the sum of the stake coefficients and the total amount of SOL staked to the pool. | </p>
     </div>
   );
 };
